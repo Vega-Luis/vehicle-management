@@ -49,6 +49,13 @@ isConglomerate(Manufacturer):-
     sort(List, Sorted),
     length(Sorted, Length), Length >= 2.
 
+% Checks if exist a path between two models
+connection(Manufacturer, Model, Model):-
+    true,!.
+connection(Manufacturer, Model, Model2):-
+    related(Manufacturer, Model, X),
+    connection(Manufacturer, X, Model2),!.
+
 % Show vehicle information.
 showVehicle(Manufacturer, Model):-
     manufacturer(Manufacturer, vehicle(Brand, Model, Style, Cylinder, Autonomy)),
